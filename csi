@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+var program = require('commander');
+var fs = require('fs');
+var _ = require('lodash');
+var path = require('path');
+var rimraf = require('rimraf');
+var rb = require('./rollback');
+
+var config = require(__dirname + '/.data/store.json');
+
+program.version('1.0.0');
+program.parse(process.argv);
