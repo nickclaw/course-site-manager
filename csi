@@ -9,5 +9,6 @@ var rb = require('./rollback');
 var config = require(__dirname + '/.data/store.json');
 
 program.version('1.0.0');
+require('./actions/pull')(program, config);
 require('./actions/install')(program, config);
 program.parse(process.argv);
