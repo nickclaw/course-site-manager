@@ -1,5 +1,4 @@
 var path = require('path'),
-    util = require('../util'),
     file = require('../file');
 
 module.exports = function(program, config) {
