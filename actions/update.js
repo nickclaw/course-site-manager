@@ -5,8 +5,7 @@ var Promise = require('bluebird'),
 module.exports = function(program, config) {
 
     program.command('update <key>')
-    .description('Deploy a course-site instance.')
-    .option('-a, --all', 'Deploy to all instances.')
+    .description('Update a course-site instance with the master instance.')
     .action(function(key) {
 
         var instance = config.instances[key];
