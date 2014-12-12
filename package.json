@@ -1,5 +1,5 @@
 {
-  "name": "cs-installer",
+  "name": "course-site-manager",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^2.3.11",
     "commander": "^2.5.0",
