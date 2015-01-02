@@ -56,6 +56,18 @@ function copy(src, dest) {
     };
 }
 
+function symlink(src, dest) {
+    return function() {
+        console.log('Symlinking: ' + src + ' -> ' + dest);
+        return new Promise(function(res, rej) {
+            fs.symlink(src, dest, function(err) {
+                if (err) return rej(err);
+                res();
+            });
+        });
+    };
+}
+
 function runProcess(command, args, options) {
     return new Promise(function(res, rej) {
         var ps = spawn(command, args, options);
@@ -89,5 +101,6 @@ module.exports = {
     remove: remove,
     prompt: prompt,
     copy: copy,
-    run: run
+    run: run,
+    symlink: symlink
 };

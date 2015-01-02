@@ -1,7 +1,11 @@
 var path = require('path'),
-    file = require('../file');
+    file = require('../file'),
+    _ = require('lodash');
 
-module.exports = function(program, config) {
+/**
+ * Pull recent changes, build master instance
+ */
+module.exports = function(program, config, env) {
 
     var command = program.command('pull')
     .description('Pull in and build the master course-site.')
@@ -9,7 +13,7 @@ module.exports = function(program, config) {
     .option('-c, --commit <commit>', 'Pull in a specific commit.')
     .action(function() {
 
-        var data = path.join(__dirname, '../.data');
+        var data = env.dataPath;
         var cwd = path.join(data, 'instance');
         var tmp = path.join(data, 'old_instance');
 
@@ -25,6 +29,10 @@ module.exports = function(program, config) {
             .then(file.remove(path.join(cwd, 'app/config/parameters.yml')))
             .then(function() {
                 console.log('New master instance installed.');
+                _.each(config.instances, function(instance) {
+                    instance.behind--;
+                });
+
             }, function(err) {
                 console.log('Unable to install new master instance.');
                 console.log(err);

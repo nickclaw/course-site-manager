@@ -2,7 +2,10 @@ var Promise = require('bluebird'),
     path = require('path'),
     file = require('../file');
 
-module.exports = function(program, config) {
+/**
+ * Update an existing instance with the master instance
+ */
+module.exports = function(program, config, env) {
 
     program.command('update <key>')
     .description('Update a course-site instance with the master instance.')
@@ -13,7 +16,7 @@ module.exports = function(program, config) {
             return console.log('Unknown instance: ' + key);
         }
 
-        var data = path.join(__dirname, '../.data');
+        var data = env.dataPath;
         var tmp = path.join(data, 'tmp', key);
         var master = path.join(data, 'instance');
         var dest = instance.path;
@@ -38,7 +41,9 @@ module.exports = function(program, config) {
             })
             .then(file.run(dest, 'php', ['./app/console', 'bio:update']))
             .then(function() {
-                console.log('New instance installed: ' + dest);
+                console.log('Instance updated ' + dest);
+                instance.behind = 0;
+                instance.updated = Date.now();
             }, function(err) {
                 console.log('New instance was not installed.');
                 return file.remove(dest)()

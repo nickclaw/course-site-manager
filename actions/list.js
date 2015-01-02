@@ -1,6 +1,9 @@
 var _ = require('lodash');
 
-module.exports = function(program, config) {
+/**
+ * List all current instances
+ */
+module.exports = function(program, config, env) {
 
     var command = program.command('list [key]')
     .description('Lists all installed instances.')
@@ -33,6 +36,7 @@ module.exports = function(program, config) {
                 console.log('  webRoot: ', instance.webRoot || instance.path + '/web');
                 console.log('  created: ', instance.created);
                 console.log('  updated: ', instance.updated);
+                console.log('  behind master by: ', instance.behind);
                 console.log();
             }
         });
