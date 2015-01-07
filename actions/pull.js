@@ -30,7 +30,7 @@ module.exports = function(program, config, env) {
             .then(function() {
                 console.log('New master instance installed.');
                 _.each(config.instances, function(instance) {
-                    instance.behind--;
+                    instance.behind++;
                 });
 
             }, function(err) {

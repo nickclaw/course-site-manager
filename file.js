@@ -96,11 +96,16 @@ function runProcess(command, args, options) {
     });
 }
 
+function exists(dir) {
+    return fs.existsAsync(dir);
+}
+
 module.exports = {
     rename: rename,
     remove: remove,
     prompt: prompt,
     copy: copy,
     run: run,
-    symlink: symlink
+    symlink: symlink,
+    exists: exists
 };
