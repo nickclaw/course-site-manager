@@ -97,7 +97,14 @@ function runProcess(command, args, options) {
 }
 
 function exists(dir) {
-    return fs.existsAsync(dir);
+    return function() {
+        return new Promise(function(res, rej) {
+            fs.exists(dir, function(does) {
+                if (!does) return rej();
+                res();
+            });
+        });
+    };
 }
 
 module.exports = {

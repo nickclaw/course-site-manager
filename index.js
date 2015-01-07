@@ -37,6 +37,7 @@ var env = {
 };
 
 program.version('1.0.0');
+require('./actions/add')(program, config, env);
 require('./actions/list')(program, config, env);
 require('./actions/pull')(program, config, env);
 require('./actions/update')(program, config, env);
