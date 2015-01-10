@@ -33,7 +33,7 @@ module.exports = function(program, config, env) {
             console.log(key);
             if (command.verbose) {
                 console.log('  path:    ', instance.path);
-                console.log('  webRoot: ', instance.webRoot || instance.path + '/web');
+                console.log('  webRoot: ', instance.webdir);
                 console.log('  created: ', instance.created);
                 console.log('  updated: ', instance.updated);
                 console.log('  behind master by: ', instance.behind);
