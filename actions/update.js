@@ -29,11 +29,22 @@ module.exports = function(program, config, env) {
                 console.error(err);
                 process.exit(0);
             })
+
+            // copy master to destination
             .then(file.copy(master, dest))
+
+            // copy old parameters
             .then(file.remove(path.join(dest, 'app/config/parameters.yml')))
             .then(file.copy(
                 path.join(tmp, 'app/config/parameters.yml'),
                 path.join(dest, 'app/config/parameters.yml')
+            ))
+
+            // copy old files
+            .then(file.remove(path.join(dest, 'web/files')))
+            .then(file.copy(
+                path.join(tmp, 'web/files'),
+                path.join(dest, 'web/files')
             ))
             .catch(function(err) {
                 console.log('Could not safely copy master instance.');
