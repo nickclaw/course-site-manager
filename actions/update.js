@@ -51,6 +51,7 @@ module.exports = function(program, config, env) {
                 return Promise.reject(err);
             })
             .then(file.run(dest, 'php', ['./app/console', 'bio:update']))
+            .then(file.run(dest, 'chmod', ['-R', '777', 'app/cache', 'app/logs', 'web/files']))
             .then(function() {
                 console.log('Instance updated ' + dest);
                 instance.behind = 0;
